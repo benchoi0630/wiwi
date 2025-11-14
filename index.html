@@ -24,6 +24,7 @@
         .comic-page {
             width: 100%;
             display: none;
+            pointer-events: none;
         }
 
         .comic-page.active {
@@ -38,6 +39,8 @@
             width: 60px;
             height: 130px;
             cursor: pointer;
+            z-index: 9999;
+            pointer-events: auto;
         }
     </style>
 </head>
@@ -46,7 +49,7 @@
     <div class="comic-container">
         <!-- PAGE 1 -->
         <img src="page1.png" class="comic-page active" id="page1" />
-        <div class="click-zone" onclick="nextPage()"></div>
+        <div class="click-zone" onclick="switchOnOff()"></div>
 
         <!-- PAGE 2 -->
         <img src="page2.png" class="comic-page" id="page2" />
@@ -55,7 +58,13 @@
     <script>
         let current = 1;
 
-        function nextPage() {
+        function playClickSound() {
+            const clickSound = new Audio("click.mp3");
+            clickSound.play();
+        }
+
+        function switchOnOff() {
+            playClickSound();
             const p1 = document.getElementById("page1");
             const p2 = document.getElementById("page2");
 
